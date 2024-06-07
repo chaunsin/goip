@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/chaunsin/goip?status.svg)](https://godoc.org/github.com/chaunsin/goip) [![Go Report Card](https://goreportcard.com/badge/github.com/chaunsin/goip)](https://goreportcard.com/report/github.com/chaunsin/goip)
 
-a golang library that get client ip from HTTP request
+A golang library that get client ip from HTTP request
 
 The [gin web framework](https://github.com/gin-gonic/gin) is a very good framework, with its own integration of
 the [ClientIP()](https://github.com/gin-gonic/gin/blob/64ead9e6bd924d431f4dd612349bc5e13300e6fc/context.go#L824) method,
