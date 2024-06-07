@@ -96,7 +96,7 @@ func Example() {
 
 ## How does it work?
 
-The basic principle is to look up the specified object value from the http request header.
+The basic principle is to look up the specified object value from the [HTTP request header](https://github.com/golang/go/blob/48103d97a84d549b44bc4764df6958f73ba5ee02/src/net/http/request.go#L174).
 
 The following process is used to search for an ip address:
 
