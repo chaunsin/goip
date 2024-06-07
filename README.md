@@ -95,6 +95,21 @@ func Example() {
 }
 ```
 
+## How does it work?
+
+The basic principle is to look up the specified object value from the http request header.
+
+The following process is used to search for an ip address:
+
+1. If the user uses a custom request header(
+   e.g. [CF-Connecting-IP](https://developers.cloudflare.com/fundamentals/reference/http-request-headers/#cf-connecting-ip)
+   、X-Appengine-Remote-Addr...), the fetch is attempted directly from the request header.
+2. Get [RemoteAddr](https://github.com/golang/go/blob/48103d97a84d549b44bc4764df6958f73ba5ee02/src/net/http/request.go#L294) to determine whether the address is in the trusted whitelist, and if so, go to Step 3，Otherwise, go to
+   Step 4 return RemoteAddr
+3. If RemoteAddr is a trusted address, it attempts to get an ip address from X-Real-IP、X-Forward-For、Forwarded, and
+   reverse-searches for the first ip address that is not in the trusted address list
+4. return ip
+
 ## Thanks
 
 - https://github.com/gin-gonic/gin

@@ -103,10 +103,12 @@ func NewParse(proxies []string, customHeader ...XHeader) (*Parser, error) {
 	return &parser, nil
 }
 
+// SetTrustedProxies Set a global trusted proxy server address
 func SetTrustedProxies(proxies []string) error {
 	return defaultParser.SetTrustedProxies(proxies)
 }
 
+// SetTrustedProxies Set a trusted proxy server address. like SetTrustedProxies()
 func (p *Parser) SetTrustedProxies(proxies []string) (err error) {
 	cidrs, err := parseCIDRs(proxies)
 	if err != nil {
@@ -116,11 +118,12 @@ func (p *Parser) SetTrustedProxies(proxies []string) (err error) {
 	return
 }
 
+// ClientIP get the ip address from the global default configuration
 func ClientIP(req *http.Request, customHeader ...XHeader) string {
 	return defaultParser.ClientIP(req, customHeader...)
 }
 
-// ClientIP get client ip
+// ClientIP get client ip. like ClientIP()
 func (p *Parser) ClientIP(req *http.Request, customHeader ...XHeader) string {
 	if req == nil || req.Header == nil {
 		return ""
@@ -263,7 +266,11 @@ func (p *Parser) validateXHeader(header string) (clientIP string, valid bool) {
 	return "", false
 }
 
+// Regular expression to match key-value pairs
+var pairRegex = regexp.MustCompile(`(?i)(for|by|host|proto)=("[^"]+"|\[[^\]]+\]|[^;,\s]+)`)
+
 // ForwardedHeader represents the structure of a parsed Forwarded header
+// standard RFC-7239 https://www.rfc-editor.org/rfc/rfc7239.txt section 5
 type ForwardedHeader struct {
 	For   string
 	By    string
@@ -277,9 +284,6 @@ type ForwardedHeader struct {
 // - Forwarded: for="[2001:db8:cafe::17]", for=unknown
 func ParseForwardedHeader(headerValue string) ([]ForwardedHeader, error) {
 	var result []ForwardedHeader
-
-	// Regular expression to match key-value pairs
-	pairRegex := regexp.MustCompile(`(?i)(for|by|host|proto)=("[^"]+"|\[[^\]]+\]|[^;,\s]+)`)
 
 	// Split the header by comma to handle multiple forwarded elements
 	elements := strings.Split(headerValue, ",")
