@@ -101,7 +101,7 @@ The basic principle is to look up the specified object value from the http reque
 
 The following process is used to search for an ip address:
 
-1. If the user uses a custom request header(
+1. If the user a custom request header(
    e.g. [CF-Connecting-IP](https://developers.cloudflare.com/fundamentals/reference/http-request-headers/#cf-connecting-ip)
    、X-Appengine-Remote-Addr...), the fetch is attempted directly from the request header.
 2. Get [RemoteAddr](https://github.com/golang/go/blob/48103d97a84d549b44bc4764df6958f73ba5ee02/src/net/http/request.go#L294) to determine whether the address is in the trusted whitelist, and if so, go to Step 3，Otherwise, go to
