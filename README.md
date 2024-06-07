@@ -14,9 +14,8 @@ too heavy, so stand on the shoulders of the giants, pull out the relevant code, 
 - X-Real-IP rules are supported
 - Follows the rule of X-Forwarded-For
 - Follows the rule of RFC-7239 standard Forwarded
-- The trusted address is allowed to be configured
+- The trusted local or private address is allowed to be configured
 - Allows getting ip from custom headers
-- Exclude local or private address
 
 ## Installation
 
